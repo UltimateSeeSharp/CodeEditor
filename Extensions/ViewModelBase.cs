@@ -1,3 +1,9 @@
+using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+
+namespace Placeholder;
+
 public class ViewModelBase : INotifyPropertyChanged
 {
     /// Standard implementation of <seealso cref="INotifyPropertyChanged"/>.
