@@ -1,3 +1,14 @@
+using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Utils;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Text;
+using System.Windows.Input;
+using XamlToJson.Wpf.Extensions.TextEditor;
+
+namespace Placeholder;
+
 public class DocumentRootViewModel : ViewModelBase
 {
     private string _FilePath;
