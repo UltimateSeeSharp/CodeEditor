@@ -1,0 +1,88 @@
+<!--  Install Avalon in nuget manager  -->
+
+<Grid
+  xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+  xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing;assembly=ICSharpCode.AvalonEdit"
+  xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit"
+  Grid.Row="0">
+  <!--  Select language  -->
+  <!--  SyntaxHighlighting  -->
+  <avalonEdit:TextEditor
+      Name="avEditor"
+      Background="White"
+      DataContext="{Binding DocumentRoot}"
+      Document="{Binding Document, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+      Foreground="Black"
+      Height="400"
+      IsModified="False"
+      IsReadOnly="False"
+      LineNumbersForeground="Black"
+      SyntaxHighlighting="Json">
+      
+      <avalonEdit:TextEditor.Template>
+          <ControlTemplate TargetType="{x:Type avalonEdit:TextEditor}">
+              <ControlTemplate.Resources>
+                  <Style TargetType="{x:Type rendering:TextView}">
+                      <Setter Property="NonPrintableCharacterBrush" Value="#3F8080FF" />
+                      <Setter Property="LinkTextForegroundBrush" Value="#FF4040FF" />
+                      <!--  Style hyperlink displayed within text in text editor  -->
+                      <Setter Property="LinkTextBackgroundBrush" Value="White" />
+            
+                  <Style TargetType="{x:Type editing:TextArea}">
+                      <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                      <Setter Property="SelectionBrush" Value="#1ba1e2" />
+                      <Setter Property="SelectionBorder">
+                          <Setter.Value>
+                              <Pen Brush="#1ba1e2" Thickness="1" />
+                          </Setter.Value>
+                      </Setter>
+                      <Setter Property="SelectionCornerRadius" Value="0" />
+                      <Setter Property="SelectionForeground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                      <Setter Property="Template">
+                          <Setter.Value>
+                              <ControlTemplate TargetType="{x:Type editing:TextArea}">
+                                  <DockPanel Focusable="False">
+                                      <ItemsControl
+                                          DockPanel.Dock="Left"
+                                          Focusable="False"
+                                          ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LeftMargins}">
+                                          <ItemsControl.ItemsPanel>
+                                              <ItemsPanelTemplate>
+                                                  <StackPanel Orientation="Horizontal" />
+                                              </ItemsPanelTemplate>
+                                          </ItemsControl.ItemsPanel>
+                                      </ItemsControl>
+                                      <ContentPresenter
+                                          Panel.ZIndex="-1"
+                                          Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TextView}"
+                                          Focusable="False" />
+                                  </DockPanel>
+                              </ControlTemplate>
+                          </Setter.Value>
+                      </Setter>
+                  </Style>
+              </ControlTemplate.Resources>
+              <Border
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}">
+                  <ScrollViewer
+                      Name="PART_ScrollViewer"
+                      Padding="{TemplateBinding Padding}"
+                      HorizontalContentAlignment="Left"
+                      VerticalContentAlignment="Top"
+                      CanContentScroll="True"
+                      Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TextArea}"
+                      Focusable="False"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto" />
+              </Border>
+              <ControlTemplate.Triggers>
+                  <Trigger Property="WordWrap" Value="True">
+                      <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Disabled" />
+                  </Trigger>
+              </ControlTemplate.Triggers>
+          </ControlTemplate>
+      </avalonEdit:TextEditor.Template>
+  </avalonEdit:TextEditor>
+</Grid>
