@@ -1,3 +1,9 @@
+using System;
+using System.Diagnostics;
+using System.Windows.Input;
+
+namespace Placeholder;
+
 internal class RelayCommand<T> : ICommand
 {
     private readonly Action<T> mExecute = null;
